@@ -1,0 +1,11 @@
+<form [formGroup]="bookForm">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" aria-describedby="title" placeholder="Dune" formControlName="title">
+    </div>
+    <div class="form-group">
+        <label for="author">Author</label>
+        <input type="author" class="form-control" id="author" placeholder="Frank Herbert" formControlName="author">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="saveBook()">Submit</button>
+</form>

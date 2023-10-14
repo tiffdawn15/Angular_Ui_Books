@@ -5,15 +5,20 @@ import { Observable } from "rxjs";
 export const BASE_URI: string = "http://localhost:8080/";
 
 export interface Book {
-  id: string;
+  id?: string;
   title: string;
-  author: string
+  author: string;
+}
+
+export interface AddBook {
+  title: string;
+  author: string;
 }
 
 export interface GetResult {
   worked: boolean;
   httpStatus: string;
-  result: Book[]
+  result: Book[];
 }
 
 @Injectable({
@@ -24,5 +29,9 @@ export class BookService {
 
   getDetails(): Observable<GetResult> {
     return this.httpClient.get<GetResult>(BASE_URI + "api/books/v1");
+  }
+
+  postBook(book: AddBook): Observable<boolean> {
+    return this.httpClient.post<boolean>(BASE_URI + "api/books/v1", book);
   }
 }
