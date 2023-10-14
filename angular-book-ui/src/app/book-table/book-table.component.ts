@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Book, BookService } from "../book.service";
+import { Book, BookService, GetResult } from "../book.service";
 
 
 @Component({
@@ -14,24 +14,22 @@ export class BookTableComponent implements OnInit {
   collectionSize = 0;
 
   constructor(private bookService: BookService) {
+    this.refreshTable();
   }
 
   ngOnInit() {
     this.bookService.getDetails().subscribe((res) => {
-      console.log(res.result);
       this.books = res.result;
       this.collectionSize = this.books.length;
     });
   }
 
-  // TODO: fix this 
-  // refreshCountries() {
-  //   this.books = books.map((book, i) => ({
-  //     id: i + 1,
-  //     ...book,
-  //   })).slice(
-  //     (this.page - 1) * this.pageSize,
-  //     (this.page - 1) * this.pageSize + this.pageSize
-  //   );
-  // }
+  refreshTable() {
+    this.books =  this.books.map((book, i) => ({
+      ...book,
+    })).slice(
+      (this.page - 1) * this.pageSize,
+      (this.page - 1) * this.pageSize + this.pageSize
+    );
+  }
 }
