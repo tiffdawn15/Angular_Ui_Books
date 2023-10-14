@@ -24,7 +24,6 @@ export class BookTableComponent implements OnInit {
     });
   }
 
-  // TODO: fix this 
   refreshTable() {
     this.books =  this.books.map((book, i) => ({
       ...book,
@@ -33,13 +32,4 @@ export class BookTableComponent implements OnInit {
       (this.page - 1) * this.pageSize + this.pageSize
     );
   }
-
-
-
-	// refreshCountries() {
-	// 	this.countries = COUNTRIES.map((country, i) => ({ id: i + 1, ...country })).slice(
-	// 		(this.page - 1) * this.pageSize,
-	// 		(this.page - 1) * this.pageSize + this.pageSize,
-	// 	);
-	// }
 }
