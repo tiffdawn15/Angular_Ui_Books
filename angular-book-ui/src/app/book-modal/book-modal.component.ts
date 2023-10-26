@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { AddBook, BookService } from "../book.service";
 import { FormControl, FormGroup } from "@angular/forms";
+import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-book-modal",
@@ -12,8 +13,13 @@ export class BookModalComponent {
     title: new FormControl(""),
     author: new FormControl(""),
   });
+  private modalRef: any;
 
-  constructor(private bookService: BookService) {}
+
+  constructor(private bookService: BookService,
+    private _modalService: NgbModal,
+    public activeModal: NgbActiveModal
+    ) {}
 
   saveBook() {
     let b: AddBook = {
@@ -21,10 +27,10 @@ export class BookModalComponent {
       author: this.bookForm.value.author || "",
     };
 
-    console.log(b);
+    
     
     this.bookService.postBook(b).subscribe((data) => {
-      console.log(data);
+      this.activeModal.close();
     });
   }
 }
