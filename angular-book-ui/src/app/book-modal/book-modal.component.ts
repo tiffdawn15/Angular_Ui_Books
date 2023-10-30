@@ -15,7 +15,6 @@ export class BookModalComponent {
   });
   private modalRef: any;
 
-
   constructor(private bookService: BookService,
     private _modalService: NgbModal,
     public activeModal: NgbActiveModal
@@ -26,11 +25,10 @@ export class BookModalComponent {
       title: this.bookForm.value.title || "",
       author: this.bookForm.value.author || "",
     };
-
-    
     
     this.bookService.postBook(b).subscribe((data) => {
       this.activeModal.close();
     });
   }
+
 }
