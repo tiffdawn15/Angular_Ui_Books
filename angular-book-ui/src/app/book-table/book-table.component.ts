@@ -53,13 +53,9 @@ export class BookTableComponent implements OnInit {
       );
   }
 
-  // TODO:
-  // 1. open modal with book informaiton
-  // 2. onSubmit go to edit Modal -- how will i tell the difference between
   editBook(book: Book) {
     console.log(book);
     const modalRef = this._modalService.open(BookModalComponent);
-    // TODO: How do you get these to populate in the form
     modalRef.componentInstance.book = book;
     console.log(modalRef);
   }
