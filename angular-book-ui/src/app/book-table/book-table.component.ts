@@ -60,8 +60,8 @@ export class BookTableComponent implements OnInit {
     console.log(book);
     const modalRef = this._modalService.open(BookModalComponent);
     // TODO: How do you get these to populate in the form
-    modalRef.componentInstance.author = book.author;
-    modalRef.componentInstance.title = book.title;
+    modalRef.componentInstance.book = book;
+    console.log(modalRef);
   }
 
   deleteBook(id: string) {

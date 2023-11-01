@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { AddBook, BookService } from "../book.service";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
-import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+
+import { AddBook, Book, BookService } from "../book.service";
 
 @Component({
   selector: "app-book-modal",
@@ -9,7 +10,11 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./book-modal.component.scss"],
 })
 export class BookModalComponent implements OnInit {
+  @Input()
+  public book!: Book;
+
   bookForm = new FormGroup({
+    id: new FormControl(""),
     title: new FormControl(""),
     author: new FormControl(""),
   });
@@ -20,18 +25,32 @@ export class BookModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-   console.log(this.bookForm.value.title);
-
+    if (this.book != undefined) {
+      this.bookForm.controls.author.setValue(this.book.author);
+      this.bookForm.controls.title.setValue(this.book.title);
+    }
   }
 
-  saveBook() {
-    let b: AddBook = {
-      title: this.bookForm.value.title || "",
-      author: this.bookForm.value.author || "",
-    };
+  onSubmit() {
+    if (this.book === undefined) {
+      let b: AddBook = {
+        title: this.bookForm.value.title || "",
+        author: this.bookForm.value.author || "",
+      };
 
-    this.bookService.postBook(b).subscribe((data) => {
-      this.activeModal.close();
-    });
+      this.bookService.postBook(b).subscribe((data) => {
+        this.activeModal.close();
+      });
+    } else {
+      let b: Book = {
+        id: this.book.id,
+        title: this.bookForm.value.title || "",
+        author: this.bookForm.value.author || "",
+      };
+
+      this.bookService.putBook(b.id, b).subscribe((data) => {
+        this.activeModal.close();
+      });
+    }
   }
 }
