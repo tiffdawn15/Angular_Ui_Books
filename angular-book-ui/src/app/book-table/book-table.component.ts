@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Book, BookService, GetResult } from "../book.service";
+import { Book, BookService } from "../book.service";
 import { BookModalComponent } from "../book-modal/book-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
@@ -43,7 +43,6 @@ export class BookTableComponent implements OnInit {
   }
 
   refreshTable() {
-    this.getBooks();
     this.books = this.books
       .map((book, i) => ({
         ...book,
