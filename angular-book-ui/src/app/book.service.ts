@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 export const BASE_URI: string = "http://localhost:8080/";
 
 export interface Book {
-  id?: string;
+  id: string;
   title: string;
   author: string;
 }
@@ -35,9 +35,15 @@ export class BookService {
     return this.httpClient.post<boolean>(BASE_URI + "api/books/v1", book);
   }
 
-  putBook(id: string, book: AddBook): Observable<boolean> {
+  putBook(id: string, book: Book): Observable<boolean> {
     const url = BASE_URI + "api/books/v1/" + id;
     console.log(url);
     return this.httpClient.put<boolean>(url, book);
+  }
+
+  deleteBook(id: string): Observable<boolean> {
+    const url = BASE_URI + "api/books/v1/" + id;
+    console.log(url);
+    return this.httpClient.delete<boolean>(url);
   }
 }

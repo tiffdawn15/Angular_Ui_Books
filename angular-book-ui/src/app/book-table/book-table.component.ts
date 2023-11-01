@@ -11,7 +11,6 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class BookTableComponent implements OnInit {
   @Input()
   public updateBook: any;
-
   private anyData: any;
 
   books: Book[] = [];
@@ -44,6 +43,7 @@ export class BookTableComponent implements OnInit {
   }
 
   refreshTable() {
+    this.getBooks();
     this.books = this.books
       .map((book, i) => ({
         ...book,
@@ -53,19 +53,27 @@ export class BookTableComponent implements OnInit {
         (this.page - 1) * this.pageSize + this.pageSize
       );
   }
-// TODO: 
-// 1. open modal with book informaiton 
-// 2. onSubmit go to edit Modal -- how will i tell the difference between 
+
+  // TODO:
+  // 1. open modal with book informaiton
+  // 2. onSubmit go to edit Modal -- how will i tell the difference between
   editBook(book: Book) {
     console.log(book);
-    const modalRef = this._modalService.open(BookModalComponent, {
-      size: "xl",
-    });
+    const modalRef = this._modalService.open(BookModalComponent);
+    // TODO: How do you get these to populate in the form
     modalRef.componentInstance.author = book.author;
-    modalRef.componentInstance.title = book.author;
+    modalRef.componentInstance.title = book.title;
   }
 
-  deleteBook(){
-    console.log('Delete Book');
+  deleteBook(id: string) {
+    this.bookService.deleteBook(id).subscribe({
+      next(res: any) {
+        console.log("Current Position: ", res);
+      },
+      error(msg: any) {
+        console.log("Error Getting Location: ", msg);
+      },
+    });
+    this.getBooks();
   }
 }
