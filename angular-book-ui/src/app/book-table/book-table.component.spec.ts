@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookTableComponent } from './book-table.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BookTableComponent', () => {
   let component: BookTableComponent;
@@ -8,7 +9,8 @@ describe('BookTableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BookTableComponent]
+      declarations: [BookTableComponent], 
+      imports: [HttpClientTestingModule]
     });
     fixture = TestBed.createComponent(BookTableComponent);
     component = fixture.componentInstance;
