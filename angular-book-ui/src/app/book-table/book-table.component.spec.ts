@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookTableComponent } from './book-table.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NgbModule, NgbPagination, NgbPaginationNext } from '@ng-bootstrap/ng-bootstrap';
 
 describe('BookTableComponent', () => {
   let component: BookTableComponent;
@@ -8,7 +10,10 @@ describe('BookTableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BookTableComponent]
+      declarations: [BookTableComponent], 
+      imports: [HttpClientTestingModule,
+        NgbPagination
+        ]
     });
     fixture = TestBed.createComponent(BookTableComponent);
     component = fixture.componentInstance;
@@ -19,3 +24,5 @@ describe('BookTableComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
