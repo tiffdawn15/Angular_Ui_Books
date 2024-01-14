@@ -7,6 +7,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
   selector: "app-book-table",
   templateUrl: "./book-table.component.html",
   styleUrls: ["./book-table.component.scss"],
+
 })
 export class BookTableComponent implements OnInit {
   @Input()
@@ -71,4 +72,5 @@ export class BookTableComponent implements OnInit {
     });
     this.getBooks();
   }
+
 }

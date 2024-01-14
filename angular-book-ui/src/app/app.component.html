@@ -3,4 +3,8 @@
     <app-header></app-header>
     <app-book-table></app-book-table>
   </section>
+
+  <button (click)="fadeInAndOut()">Fade in and Out</button>
+  <div @fadeIn *ngIf="isShown" > This should fade in and out</div>
+
 </main>
